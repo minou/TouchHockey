@@ -3,7 +3,7 @@ kivy.require('1.0.9')
 
 from kivy.uix.widget import Widget
 from kivy.core.window import Window
-from kivy.properties import OptionProperty, NumericProperty
+from kivy.properties import OptionProperty, NumericProperty, ListProperty
 from kivy.vector import Vector
 
 
@@ -11,6 +11,7 @@ class Puck(Widget):
     radius = NumericProperty(Window.height * .08)
     score = NumericProperty(0)
     state = OptionProperty('right', options=('right', 'left'))
+    list_points = ListProperty([])
 
     def collide_point(self, x, y):
         distance = Vector(self.pos).distance(Vector(x, y))
@@ -25,6 +26,7 @@ class Puck(Widget):
         touch.ud[self] = True
         touch.ud['movable.dx'] = touch.x - self.x
         touch.ud['movable.dy'] = touch.y - self.y
+        self.list_points = []
         return True
 
     def on_touch_move(self, touch):
@@ -46,4 +48,5 @@ class Puck(Widget):
                 return
         self.x = touch.x - touch.ud['movable.dx']
         self.y = touch.y - touch.ud['movable.dy']
+        self.list_points = self.list_points + [touch.x, touch.y]
         return True

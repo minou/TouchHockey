@@ -107,8 +107,10 @@
         id: player_right
         state: 'right'
         pos: win.Window.width * .5 - win.Window.height * .5, win.Window.height * .5
+        on_touch_up: root.update_trajectory
 
     Puck:
         id: player_left
         state: 'left'
         pos: win.Window.width * .5 + win.Window.height * .5, win.Window.height * .5
+        on_touch_up: root.update_trajectory()

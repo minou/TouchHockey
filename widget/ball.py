@@ -25,7 +25,7 @@ class Ball(Widget):
     def update_angle(self, angle):
         self.velocity_x = self.radius * cos(radians(angle))
         self.velocity_y = self.radius * sin(radians(angle))
-        print self.velocity_x, self.velocity_y
+        #print self.velocity_x, self.velocity_y
         
     def update(self):
         self.pos = Vector(*self.velocity) + self.pos
