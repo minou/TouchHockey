@@ -6,7 +6,6 @@ from kivy.core.window import Window
 from kivy.properties import NumericProperty, OptionProperty, ListProperty, ReferenceListProperty
 from random import random
 from kivy.vector import Vector
-from math import cos, sin, radians
 
 
 class Ball(Widget):
@@ -22,11 +21,6 @@ class Ball(Widget):
         distance = Vector(self.pos).distance(Vector(widget.pos))
         return distance <= self.radius + widget.radius
 
-    def update_angle(self, angle):
-        self.velocity_x = self.radius * cos(radians(angle))
-        self.velocity_y = self.radius * sin(radians(angle))
-        #print self.velocity_x, self.velocity_y
-        
     def update(self):
         self.pos = Vector(*self.velocity) + self.pos
         if (self.x - self.radius <= 0) or (self.x + self.radius >= Window.width):

@@ -27,23 +27,20 @@ class Game(Widget):
             if (self.player1.score == 10) or (self.player2.score == 10):
                 if self.parent != None:
                     self.parent.remove_widget(self)
-        
-
         for player in self.player1, self.player2:
             if self.ball.collide_widget(player):
-                self.angle = Vector(player.pos).angle(Vector(self.ball.pos))
-                #print self.angle
-                #self.ball.update_angle(self.angle)
+                self.update_trajectory()
 
     def update_trajectory(self):
-        if self.player1.list_points != []:
-            list_points = self.player1.list_points
-        if self.player2.list_points != []:
-            list_points = self.player2.list_points
-        a, b = self.linreg(list_points)
-        print a, b
-        #self.ball.velocity = self.linreg(obj.list_points)
-        self.ball.velocity = a / 100., b / 100. #self.linreg(obj.list_points)
+        for player in self.player1, self.player2:
+            if self.ball.collide_widget(player):
+                if self.player1.list_points != []:
+                    list_points = self.player1.list_points
+                if self.player2.list_points != []:
+                    list_points = self.player2.list_points
+                a, b = self.linreg(list_points)
+                #print a, b
+                self.ball.velocity = a / 100., b / 100.
 
 
     def linreg(self, list_of_points):
